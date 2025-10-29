@@ -104,6 +104,11 @@ jobs:
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a
 
+    - name: Fix v2ray-core
+      run: |
+        cd openwrt/feeds/packages/net/v2ray-core
+        sed -i -e 's/5.7.0/5.8.0/' -e 's/599fcd264537e39178b6008a11af68816dfd1609e19a9cf8adc8b2a4240ee370/340798554d2c7f0e5fb719f9d9dd6a667dfe93ccdd3b1d653c3a3bdb04ed2d00/' Makefile
+
     - name: Fix golang version
       run: |
         cd openwrt
