@@ -177,6 +177,13 @@ jobs:
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
 
+    - name: Compile passwall
+      run: |
+        cd openwrt
+        make tools/compile -j$(nproc)
+        make toolchain/install -j$(nproc)
+        make package/feeds/luci/luci-app-passwall/compile -j$(nproc) || make package/feeds/luci/luci-app-passwall/compile -j1 V=s
+
     - name: Compile the firmware
       id: compile
       run: |
